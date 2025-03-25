@@ -14,7 +14,6 @@ export const Page = () => {
             <div className="shadow-md rounded-md py-2 px-4 h-5/6 print:h-full overflow-y-auto print:shadow-none leading-3">
                 {anon ? <ResumeAnon /> : <Resume /> }
             </div>
-            
         </div>
     );
 }
