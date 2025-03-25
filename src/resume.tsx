@@ -6,11 +6,11 @@ export const Resume = () => {
     { href: "https://github.com/b44ken", label: "github/b44ken" },
     { href: "https://boratto.ca", label: "boratto.ca" },
     { href: "tel:2269616479", label: "226 961 6479" },
-    { href: "mailto:brad@boratto.ca", label: "brad@boratto.ca" }
+    { href: "mailto:brad@boratto.ca", label: "brad@boratto.ca" },
   ];
 
   return (
-    <div className="mx-autofont-sans text-gray-800 leading-normal">
+    <div className="mx-autofont-sans text-gray-800">
       {/* Header */}
       <Header name="Bradley Boratto" contactInfo={contactInfo} />
       
@@ -41,11 +41,12 @@ export const Resume = () => {
       <Entry 
         company="Watoga Technologies" 
         dates="Feb 2025 - Present" 
-        title="Data/ML Engineer" 
+        title="Riipen Intern" 
         location="Part-Time / Remote" 
       />
       <Bullets items={[
-        "Parsed loosely formatted geological data via LLMs and traditional methods"
+          "Wrote Python to process 440MB of poorly formatted geological data (ex. different parts of a record in different files)",
+          "Batched and multithreaded SQL queries to reduce processing time to 3.5 minutes (~8x speedup)"
       ]} />
       
       <Entry 

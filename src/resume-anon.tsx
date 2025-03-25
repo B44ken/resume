@@ -33,7 +33,6 @@ export const ResumeAnon = () => {
         dates="May 2025 - Aug 2025" 
         title="Software Engineering Intern" 
         location="Full-Time / Michigan" 
-        anon={true}
       />
       <Bullets items={[
         "Incoming SWE intern (Drones, Robotics)",
@@ -44,7 +43,6 @@ export const ResumeAnon = () => {
         dates="Feb 2025 - Present" 
         title="Data/ML Intern" 
         location="Part-Time / Remote" 
-        anon={true}
       />
       <Bullets items={[
         "Parsed loosely formatted geological data via LLMs and traditional methods"
@@ -55,7 +53,6 @@ export const ResumeAnon = () => {
         dates="Jan 2023 - May 2023" 
         title='Robotics Intern' 
         location="Part-Time / Canada" 
-        anon={true}
       />
       <Bullets items={[
         "Primary engineer of an industrial cleaning robot prototype (programming, fabrication, and electronics)",

@@ -84,18 +84,15 @@ export const SkillCategory: FC<SkillCategoryProps> = ({ title, skills }) => {
 
 export const Header: FC<HeaderProps> = ({ name, contactInfo }) => {
   return (
-    <header className="flex flex-row md:flex-row justify-between items-start md:items-center mb-1">
-      <h1 className="text-3xl font-bold">{name}</h1>
-      <div className="flex flex-wrap gap-2 text-sm mt-1 md:mt-0">
-        {contactInfo.map((item, index) => (
-          <a 
-            key={index} 
-            href={item.href} 
-            className="underline"
-          >
-            {item.label}
-          </a>
-        ))}
+    <header className="flex flex-row md:items-center mb-0 flex-wrap justify-between">
+      <h1 className="text-3xl font-bold">{name.replace(" ", "\u00A0")}</h1>
+      <div className="text-sm mt-1 md:mt-0 gap-2">
+      <div className="flex flex-row gap-2">
+          {contactInfo.map((item, index) => (
+            <a key={index} href={item.href} className="underline">{item.label}</a>
+          ))} 
+      </div>
+        <a>{"This resume was built with React/TypeScript"}</a>
       </div>
     </header>
   );
