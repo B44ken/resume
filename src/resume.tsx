@@ -23,7 +23,7 @@ export const Resume = () => {
         location="Toronto, Ontario" 
       />
       <Bullets items={[
-        "Courses include Software Engineering, Systems Programming, Physics..."
+        "Courses include Multivariable Calculus, Linear Algebra, Software Engineering, Systems Programming, Physics..."
       ]} />
       
       {/* Experience Section */}
@@ -40,13 +40,13 @@ export const Resume = () => {
       
       <Entry 
         company="Watoga Technologies" 
-        dates="Feb 2025 - Present" 
+        dates="Feb 2025 - Mar 2025" 
         title="Riipen Intern" 
         location="Part-Time / Remote" 
       />
       <Bullets items={[
-          "Wrote Python to process 440MB of poorly formatted geological data (ex. different parts of a record in different files)",
-          "Batched and multithreaded SQL queries to reduce processing time to 3.5 minutes (~8x speedup)"
+          "Used Python/SQL to process 440MB of badly formatted rock samples, then multithreaded code for 800% speedup",
+          "Built regression models to find mineral rich deposits, using novel 2D and 3D visualizations to prove accuracy"
       ]} />
       
       <Entry 
@@ -57,8 +57,8 @@ export const Resume = () => {
       />
       <Bullets items={[
         "Primary engineer of an industrial cleaning robot prototype (programming, fabrication, and electronics)",
-        "Mainly programmed subsystems (Python), interfacing parts of a robot chassis via onboard Linux PC",
-        "Implemented robot depth perception using Intel RealSense cameras and OpenCV, reverse-engineered undocumented motor controller protocols to support game controller input"
+        "Programmed subsystems (ex. RealSense depth cameras), interfacing with our robot chassis via its Linux computer",
+        "Reverse engineered undocumented motor controller protocols to support game controller input"
       ]} />
       
       {/* Extracurricular Section */}
