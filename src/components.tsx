@@ -92,7 +92,7 @@ export const Header: FC<HeaderProps> = ({ name, contactInfo }) => {
             <a key={index} href={item.href} className="underline">{item.label}</a>
           ))} 
       </div>
-        <a>{"This resume was built with React/TypeScript"}</a>
+	<p> </p>
       </div>
     </header>
   );
