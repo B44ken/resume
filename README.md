@@ -1,5 +1,5 @@
 # resume.tsx
-a nice resume template in react/typescript. example: [boratto.ca/resume.pdf](https://boratto.ca/resume.pdf)
+a nice resume template in react/typescript. see `example.pdf`
 
 ## how to use
 clone the repo, do
