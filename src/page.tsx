@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Resume } from './resume'
 
 export const Page = () => {
