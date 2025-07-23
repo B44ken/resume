@@ -8,3 +8,8 @@ npm install
 npm run dev
 ```
 then edit `src/resume.tsx`. use `ctrl+p` in your browser to export.
+
+Visit `/?anon` to view an anonymized version without personal contact details.
+
+The workflow in `.github/workflows/pages.yml` builds the site and generates a
+`dist/resume.pdf` for deployment on Cloudflare Pages.
