@@ -1,18 +1,28 @@
 import { Section, Entry, Bullets, SkillCategory, Header } from './components';
 
 export const Resume = () => {
+  // Determine if anonymized resume should be displayed
+  const isAnon = new URLSearchParams(window.location.search).has('anon');
+
   // Contact info for Header component
-  const contactInfo = [
-    { href: "https://github.com/b44ken", label: "github/b44ken" },
-    { href: "https://boratto.ca", label: "boratto.ca" },
-    { href: "tel:2269616479", label: "226 961 6479" },
-    { href: "mailto:brad@boratto.ca", label: "brad@boratto.ca" },
-  ];
+  const contactInfo = isAnon
+    ? [
+        { href: '#', label: 'github/anon' },
+        { href: '#', label: 'example.com' },
+      ]
+    : [
+        { href: 'https://github.com/b44ken', label: 'github/b44ken' },
+        { href: 'https://boratto.ca', label: 'boratto.ca' },
+        { href: 'tel:2269616479', label: '226 961 6479' },
+        { href: 'mailto:brad@boratto.ca', label: 'brad@boratto.ca' },
+      ];
+
+  const name = isAnon ? 'Anonymous' : 'Bradley Boratto';
 
   return (
     <div className="mx-autofont-sans text-gray-800">
       {/* Header */}
-      <Header name="Bradley Boratto" contactInfo={contactInfo} />
+      <Header name={name} contactInfo={contactInfo} />
       
       {/* Education Section */}
       <Section title="Education" />
