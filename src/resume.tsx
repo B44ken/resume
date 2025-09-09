@@ -45,7 +45,7 @@ export const Resume = () => {
         location="Full-Time / Troy, Michigan" 
       />
       <Bullets items={[
-	"Designed, built drone remote controller from scratch (custom PCB, 3D printed case, C++ firmware)",
+	"Built drone remote controller from scratch, wrote C++ microcontroller firmware, designed custom PCB & case",
 	"Communicated directly with clients to draft requirements, procure components, iterate on design",
 	"Designed, built battery pack for use in related drone project"
       ]} />
@@ -58,7 +58,7 @@ export const Resume = () => {
       />
       <Bullets items={[
           "Used Python/SQL to process 440MB of badly formatted rock samples, then multithreaded code for 800% speedup",
-          "Built regression models to find mineral rich deposits, using novel 2D and 3D visualizations to prove accuracy"
+          "Built regression models to find mineral rich deposits, using novel 2D & 3D visualizations to prove accuracy"
       ]} />
       
       <Entry 
@@ -68,7 +68,7 @@ export const Resume = () => {
         location="Part-Time / Windsor, Ontario" 
       />
       <Bullets items={[
-        "Primary engineer of an industrial cleaning robot prototype (programming, fabrication, and electronics)",
+        "Primary engineer of an industrial cleaning robot prototype (programming, fabrication, & electronics)",
         "Programmed subsystems (ex. RealSense depth cameras), interfacing with our robot chassis via its Linux computer",
         "Reverse engineered undocumented motor controller protocols to support game controller input"
       ]} />
@@ -93,7 +93,7 @@ export const Resume = () => {
       />
       <Bullets items={[
         "Selected by university to participate in 3 days of pair competitive-programming style challenges",
-        "Won \"High-Performance Computing\", best performance optimizing an ML framework in C++ and WebGPU"
+        "Won \"High-Performance Computing\", best performance optimizing an ML framework in C++ & WebGPU"
       ]} />
       
       <Entry 
@@ -113,7 +113,7 @@ export const Resume = () => {
         location="Windsor, Ontario" 
       />
       <Bullets items={[
-        "Created, manufactured CAD models (Fusion 360) alongside engineering team and professional mentors",
+        "Created, manufactured CAD models (Fusion 360) alongside engineering team & professional mentors",
         "Developed computer vision program (OpenCV, Java, Python) for autonomous game piece manipulation"
       ]} /> */}
       
@@ -121,7 +121,7 @@ export const Resume = () => {
       <Section title="Projects"/>
       <Entry company="onef" link="https://boratto.ca/blog/onef" />
       <Bullets items={[
-        "Toy deep learning / ML framework in plain C++. Supports inference, training (SGD and backprop) for sequential-style networks (units like Linear, ReLU). Solves many classification problems (XOR, MNIST)."
+        "Toy deep learning / ML framework in plain C++. Supports inference, training (SGD & backprop) for sequential-style networks (units like Linear, ReLU). Solves many classification problems (XOR, MNIST)."
       ]} />
       
       <Entry company="winzard" link="https://boratto.ca/winzard" />
