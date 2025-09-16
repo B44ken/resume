@@ -32,11 +32,8 @@ export const Resume = () => {
         title="BSc (Intended: Double Major, Computer Science/Physics)" 
         location="Toronto, Ontario" 
       />
-      <Bullets items={[
-        "Courses include Multivariable Calculus, Linear Algebra, Software Engineering, Systems Programming, Physics..."
-      ]} />
       
-      {/* Experience Section */}
+{/* Experience Section */}
       <Section title="Experience" />
       <Entry 
         company="RIIS" 
@@ -47,7 +44,6 @@ export const Resume = () => {
       <Bullets items={[
 	"Built drone remote controller from scratch, wrote C++ microcontroller firmware, designed custom PCB & case",
 	"Communicated directly with clients to draft requirements, procure components, iterate on design",
-	"Designed, built battery pack for use in related drone project"
       ]} />
       
       <Entry 
@@ -119,20 +115,20 @@ export const Resume = () => {
       
       {/* Projects Section */}
       <Section title="Projects"/>
-      <Entry company="onef" link="https://boratto.ca/blog/onef" />
+      <Entry company="reactutor (live demo)" link="https://reactutor.boratto.ca" />
+      <Bullets items={[
+	"AI course tutor. Users upload PDF assignments, AI parses and converts into learning goals & practice problems, which can then be converted into practice exams. AI chat provides feedback on incorrect answers, explains concepts, etc...",
+	"Backend: Flask (Python), Frontend: React, Tailwind, Vite, AI: Google Gemini Pro & Flash"
+      ]} />
+      <Entry company="onef (github)" link="https://github.com/b44ken/onef#onef" />
       <Bullets items={[
         "Toy deep learning / ML framework in plain C++. Supports inference, training (SGD & backprop) for sequential-style networks (units like Linear, ReLU). Solves many classification problems (XOR, MNIST)."
       ]} />
       
-      <Entry company="winzard" link="https://boratto.ca/winzard" />
+      <Entry company="winzard (github)" link="https://github.com/b44ken/winzard" />
       <Bullets items={[
         "Tool to generate optimal (least time between classes) university timetables, actively used by students.",
         "Led development (team of 3) when the project was officially adopted by UWindsor CS Society."
-      ]} />
-      
-      <Entry company="boratto.ca" link="https://boratto.ca" />
-      <Bullets items={[
-        "Many different services (VPN, website, Minecraft...) on many different platforms (Linux VM, Cloudflare...)."
       ]} />
       
       {/* Technical Skills Section */}
