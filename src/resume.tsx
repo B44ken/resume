@@ -21,19 +21,16 @@ export const Resume = () => {
 
   return (
     <div className="mx-autofont-sans text-gray-800">
-      {/* Header */}
       <Header name={name} contactInfo={contactInfo} />
       
-      {/* Education Section */}
       <Section title="Education" />
       <Entry 
         company="University of Toronto" 
         dates="Expected Apr 2027" 
-        title="BSc (Intended: Double Major, Computer Science/Physics)" 
+	title="Bachelor of Science, Computer Science & Physics double major"
         location="Toronto, Ontario" 
       />
       
-{/* Experience Section */}
       <Section title="Experience" />
       <Entry 
         company="RIIS" 
@@ -42,8 +39,9 @@ export const Resume = () => {
         location="Full-Time / Troy, Michigan" 
       />
       <Bullets items={[
-	"Built drone remote controller from scratch, wrote C++ microcontroller firmware, designed custom PCB & case",
-	"Communicated directly with clients to draft requirements, procure components, iterate on design",
+	"Built drone remote controller from scratch, designed custom PCB & case as well as code",
+	"Developed efficient C++ firmware (ATMega32U4: 2KB RAM, 16MHz CPU) based on asynchronous event loop",
+	"Communicated directly with clients to draft requirements, procure components, iterate on design"
       ]} />
       
       <Entry 
@@ -53,7 +51,7 @@ export const Resume = () => {
         location="Part-Time / Remote" 
       />
       <Bullets items={[
-          "Used Python/SQL to process 440MB of badly formatted rock samples, then multithreaded code for 800% speedup",
+          "Used Python/SQL to process 440MB of poorly formatted rock samples, then multithreaded code for 800% speedup",
           "Built regression models to find mineral rich deposits, using novel 2D & 3D visualizations to prove accuracy"
       ]} />
       
@@ -117,7 +115,7 @@ export const Resume = () => {
       <Section title="Projects"/>
       <Entry company="reactutor (live demo)" link="https://reactutor.boratto.ca" />
       <Bullets items={[
-	"AI course tutor. Users upload PDF assignments, AI parses and converts into learning goals & practice problems, which can then be converted into practice exams. AI chat provides feedback on incorrect answers, explains concepts, etc...",
+	"AI course tutor. Users upload PDF assignments, AI determines relevant learning goals & practice problems, and can then generate practice exams. AI chat provides feedback on incorrect answers, explains concepts, etc...",
 	"Backend: Flask (Python), Frontend: React, Tailwind, Vite (JavaScript), AI: Google Gemini Pro & Flash"
       ]} />
       <Entry company="onef (github)" link="https://github.com/b44ken/onef#onef" />
@@ -128,7 +126,6 @@ export const Resume = () => {
       <Entry company="winzard (github)" link="https://github.com/b44ken/winzard" />
       <Bullets items={[
         "Tool to generate optimal (least time between classes) university timetables, actively used by students.",
-        "Led development (team of 3) when the project was officially adopted by UWindsor CS Society."
       ]} />
       
       {/* Technical Skills Section */}
