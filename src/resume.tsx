@@ -118,7 +118,7 @@ export const Resume = () => {
       <Entry company="reactutor (live demo)" link="https://reactutor.boratto.ca" />
       <Bullets items={[
 	"AI course tutor. Users upload PDF assignments, AI parses and converts into learning goals & practice problems, which can then be converted into practice exams. AI chat provides feedback on incorrect answers, explains concepts, etc...",
-	"Backend: Flask (Python), Frontend: React, Tailwind, Vite, AI: Google Gemini Pro & Flash"
+	"Backend: Flask (Python), Frontend: React, Tailwind, Vite (JavaScript), AI: Google Gemini Pro & Flash"
       ]} />
       <Entry company="onef (github)" link="https://github.com/b44ken/onef#onef" />
       <Bullets items={[
