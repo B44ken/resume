@@ -1,33 +1,20 @@
 import { Section, Entry, Bullets, SkillCategory, Header } from './components';
 
 export const Resume = () => {
-  // Determine if anonymized resume should be displayed
-  const isAnon = new URLSearchParams(window.location.search).has('anon');
-
-  // Contact info for Header component
-  const contactInfo = isAnon
-    ? [
-        { href: '#', label: 'github/anon' },
-        { href: '#', label: 'example.com' },
-      ]
-    : [
+  return (
+    <div className="mx-autofont-sans text-gray-800">
+      <Header name={'Bradley Boratto'} contactInfo={[
         { href: 'https://github.com/b44ken', label: 'github/b44ken' },
         { href: 'https://boratto.ca', label: 'boratto.ca' },
         { href: 'tel:2269616479', label: '226 961 6479' },
-        { href: 'mailto:brad@boratto.ca', label: 'brad@boratto.ca' },
-      ];
+        { href: 'mailto:brad@boratto.ca', label: 'brad@boratto.ca' }
+      ]} />
 
-  const name = isAnon ? 'Anonymous' : 'Bradley Boratto';
-
-  return (
-    <div className="mx-autofont-sans text-gray-800">
-      <Header name={name} contactInfo={contactInfo} />
-      
       <Section title="Education" />
       <Entry 
         company="University of Toronto" 
         dates="Expected Apr 2027" 
-	title="Bachelor of Science, Computer Science & Physics double major"
+        title="Bachelor of Science, Computer Science & Physics double major"
         location="Toronto, Ontario" 
       />
       
@@ -36,30 +23,31 @@ export const Resume = () => {
         company="RIIS" 
         dates="May 2025 - Aug 2025" 
         title="Software Engineering Intern" 
-        location="Full-Time / Troy, Michigan" 
+        location="Troy, Michigan" 
       />
       <Bullets items={[
-	"Built drone remote controller from scratch, designed custom PCB & case as well as code",
-	"Developed efficient C++ firmware (ATMega32U4: 2KB RAM, 16MHz CPU) based on asynchronous event loop",
-	"Communicated directly with clients to draft requirements, procure components, iterate on design"
+	"Built drone remote controller completely from scratch with custom PCB and case as well as software",
+	"Designed efficient C++ firmware (on 2KB RAM, 16MHz CPU) based on asynchronous event loop",
+	"Communicated directly with clients to make design choices and iterate based on feedback"
       ]} />
       
       <Entry 
         company="Watoga Technologies" 
         dates="Feb 2025 - Mar 2025" 
         title="Riipen Intern" 
-        location="Part-Time / Remote" 
+        location="Remote" 
       />
       <Bullets items={[
-          "Used Python/SQL to process 440MB of poorly formatted rock samples, then multithreaded code for 800% speedup",
-          "Built regression models to find mineral rich deposits, using novel 2D & 3D visualizations to prove accuracy"
+	"Used Python to process 440MB of poorly formatted rock samples, cleanup, and add to SQL database",
+	"Multithreaded code to solve file parsing library bottleneck (7.6x speedup)",
+	"Built Scipy/Matplotlib models to find mineral rich deposits, using novel 2D and 3D visualizations to prove accuracy"
       ]} />
       
       <Entry 
         company="Optimotive" 
         dates="Jan 2023 - May 2023" 
         title='Robotics Intern' 
-        location="Part-Time / Windsor, Ontario" 
+        location="Windsor, Ontario" 
       />
       <Bullets items={[
         "Primary engineer of an industrial cleaning robot prototype (programming, fabrication, & electronics)",
@@ -90,16 +78,6 @@ export const Resume = () => {
         "Won \"High-Performance Computing\", best performance optimizing an ML framework in C++ & WebGPU"
       ]} />
       
-      <Entry 
-        company="University of Windsor" 
-        dates="Oct 2023 - Dec 2023" 
-        title="Software Developer (Research Assistant)" 
-        location="Windsor, Ontario" 
-      />
-      <Bullets items={[
-        "Developed HTTP/REST server (C++, for ESP32) to host realtime sensor data dashboard (React)"
-      ]} />
-      
       {/* <Entry 
         company="Knight Vision Robotics" 
         dates="Jan 2019 - Jun 2023" 
@@ -126,6 +104,11 @@ export const Resume = () => {
       <Entry company="winzard (github)" link="https://github.com/b44ken/winzard" />
       <Bullets items={[
         "Tool to generate optimal (least time between classes) university timetables, actively used by students.",
+      ]} />
+
+      <Entry company="imu-dashboard (github)" link="https://github.com/b44ken/imu" />
+      <Bullets items={[
+        "RA contract: Wrote ESP32 C++ HTTP server (socket level) to serve HTML and endpoints exposing sensor data"
       ]} />
       
       {/* Technical Skills Section */}
