@@ -20,7 +20,8 @@ version while you type. use `ctrl+p` (or the `print / pdf` button) to export.
 
 the font size and line height are picked automatically: the largest font size
 that still fits on one page wins, then the line height is opened up as far as it
-can go at that size. both ranges live in `src/fit.ts`.
+can go at that size. the `font` and `line` inputs in the toolbar set the range
+each one is allowed to move within, and are saved with the rest of your edits.
 
 edits are saved in your browser's local storage. the starting content lives in
 `src/data.ts` if you would rather edit it as code.

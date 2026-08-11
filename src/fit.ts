@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { FONT_STEP, LINE_STEP } from './data'
+import type { Bounds, FitLimits } from './data'
 
-type Range = { min: number, max: number, step: number }
+type Range = Bounds & { step: number }
 
 export type Fit = { fontSize: number, lineHeight: number }
 
@@ -8,16 +10,13 @@ export type Fit = { fontSize: number, lineHeight: number }
 export const PAGE_WIDTH = 8.5 * 96
 export const PAGE_HEIGHT = 11 * 96
 
-// the ranges the resume is allowed to move within: font size wins first (the
-// largest one that still fits a page), then line height is maximised for it
-export const FONT_SIZE: Range = { min: 10, max: 16, step: 0.25 }
-export const LINE_HEIGHT: Range = { min: 1.15, max: 1.5, step: 0.01 }
-
 const stepCount = (range: Range) => Math.max(0, Math.ceil((range.max - range.min) / range.step))
 
 const valueAt = (range: Range, step: number) => Math.min(range.max, range.min + step * range.step)
 
 const stepUp = (range: Range, value: number) => Math.min(range.max, value + range.step)
+
+const inRange = (range: Range, value: number) => value >= range.min && value <= range.max
 
 // largest value in the range that still fits, falling back to the minimum;
 // taller text never fits better, so the predicate can be searched
@@ -34,7 +33,12 @@ const largestFitting = (range: Range, fits: (value: number) => boolean) => {
   return valueAt(range, low)
 }
 
-const fit = (sheet: HTMLElement, previous: Fit | null): Fit => {
+// the resume is fitted inside the bounds the user picked: font size wins first
+// (the largest one that still fits a page), then line height is maximised for it
+const fit = (sheet: HTMLElement, previous: Fit | null, limits: FitLimits): Fit => {
+  const fontRange: Range = { ...limits.fontSize, step: FONT_STEP }
+  const lineRange: Range = { ...limits.lineHeight, step: LINE_STEP }
+
   // the editing chrome does not print, so it must not count towards the page
   const chrome = Array.from(sheet.querySelectorAll<HTMLElement>('[data-chrome]'))
   chrome.forEach(element => { element.style.display = 'none' })
@@ -53,16 +57,18 @@ const fit = (sheet: HTMLElement, previous: Fit | null): Fit => {
   // most edits do not change what fits, so the previous result is verified
   // first: it is still the answer when growing either value overflows
   const settled = ({ fontSize, lineHeight }: Fit) => {
-    if (!apply({ fontSize, lineHeight }))
-      return fontSize <= FONT_SIZE.min && lineHeight <= LINE_HEIGHT.min
+    if (!inRange(fontRange, fontSize) || !inRange(lineRange, lineHeight)) return false
 
-    return (fontSize >= FONT_SIZE.max || !apply({ fontSize: stepUp(FONT_SIZE, fontSize), lineHeight: LINE_HEIGHT.min }))
-      && (lineHeight >= LINE_HEIGHT.max || !apply({ fontSize, lineHeight: stepUp(LINE_HEIGHT, lineHeight) }))
+    if (!apply({ fontSize, lineHeight }))
+      return fontSize <= fontRange.min && lineHeight <= lineRange.min
+
+    return (fontSize >= fontRange.max || !apply({ fontSize: stepUp(fontRange, fontSize), lineHeight: lineRange.min }))
+      && (lineHeight >= lineRange.max || !apply({ fontSize, lineHeight: stepUp(lineRange, lineHeight) }))
   }
 
   const search = (): Fit => {
-    const fontSize = largestFitting(FONT_SIZE, size => apply({ fontSize: size, lineHeight: LINE_HEIGHT.min }))
-    return { fontSize, lineHeight: largestFitting(LINE_HEIGHT, height => apply({ fontSize, lineHeight: height })) }
+    const fontSize = largestFitting(fontRange, size => apply({ fontSize: size, lineHeight: lineRange.min }))
+    return { fontSize, lineHeight: largestFitting(lineRange, height => apply({ fontSize, lineHeight: height })) }
   }
 
   const result = previous && settled(previous) ? previous : search()
@@ -75,17 +81,24 @@ const fit = (sheet: HTMLElement, previous: Fit | null): Fit => {
 }
 
 // keeps the resume as large as it can be while staying on a single page
-export const useAutoFit = <T extends HTMLElement>() => {
+export const useAutoFit = <T extends HTMLElement>(limits: FitLimits) => {
   const ref = useRef<T>(null)
   const current = useRef<Fit | null>(null)
   const width = useRef(0)
 
+  // the bounds are read through a ref so changing them does not have to tear
+  // down the observers below
+  const latest = useRef(limits)
+
   const refit = useCallback(() => {
-    if (ref.current) current.current = fit(ref.current, current.current)
+    if (ref.current) current.current = fit(ref.current, current.current, latest.current)
   }, [])
 
   // any edit can change how much content there is, so refit after every render
-  useLayoutEffect(refit)
+  useLayoutEffect(() => {
+    latest.current = limits
+    refit()
+  })
 
   useEffect(() => {
     const sheet = ref.current

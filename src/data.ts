@@ -7,6 +7,23 @@ export type Block = SectionBlock | EntryBlock | SkillBlock
 
 export type ResumeData = { name: string, info: Contact[], blocks: Block[] }
 
+export type Bounds = { min: number, max: number }
+export type FitLimits = { fontSize: Bounds, lineHeight: Bounds }
+
+// the automatic fit walks each value in these increments
+export const FONT_STEP = 0.25
+export const LINE_STEP = 0.01
+
+// how far the inputs let the bounds themselves be moved, so a stray keystroke
+// cannot make the resume unreadable
+export const FONT_BOUNDS: Bounds = { min: 6, max: 32 }
+export const LINE_BOUNDS: Bounds = { min: 0.8, max: 2.5 }
+
+export const defaultFit = (): FitLimits => ({
+  fontSize: { min: 10, max: 16 },
+  lineHeight: { min: 1.15, max: 1.5 },
+})
+
 export const newId = () =>
   `id-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`
 
@@ -101,6 +118,7 @@ export const defaultResume = (): ResumeData => ({
 })
 
 const STORAGE_KEY = 'resume.data.v1'
+const FIT_KEY = 'resume.fit.v1'
 
 const str = (value: unknown, fallback = '') => typeof value === 'string' ? value : fallback
 
@@ -172,8 +190,49 @@ export const saveResume = (data: ResumeData) => {
 export const clearResume = () => {
   try {
     localStorage.removeItem(STORAGE_KEY)
+    localStorage.removeItem(FIT_KEY)
   } catch {
     // ignore
+  }
+}
+
+export const clamp = (value: number, bounds: Bounds) => Math.min(bounds.max, Math.max(bounds.min, value))
+
+// the bounds are user supplied too, so they are kept inside what the inputs
+// allow and in the right order before anything is measured with them
+const parseBounds = (raw: unknown, limits: Bounds, fallback: Bounds): Bounds => {
+  const value = typeof raw === 'object' && raw !== null ? raw as Record<string, unknown> : {}
+  const num = (candidate: unknown, other: number) =>
+    typeof candidate === 'number' && Number.isFinite(candidate) ? clamp(candidate, limits) : other
+
+  const min = num(value.min, fallback.min)
+  return { min, max: Math.max(min, num(value.max, fallback.max)) }
+}
+
+export const parseFit = (raw: unknown): FitLimits => {
+  const value = typeof raw === 'object' && raw !== null ? raw as Record<string, unknown> : {}
+  const fallback = defaultFit()
+
+  return {
+    fontSize: parseBounds(value.fontSize, FONT_BOUNDS, fallback.fontSize),
+    lineHeight: parseBounds(value.lineHeight, LINE_BOUNDS, fallback.lineHeight),
+  }
+}
+
+export const loadFit = (): FitLimits => {
+  try {
+    const stored = localStorage.getItem(FIT_KEY)
+    return stored ? parseFit(JSON.parse(stored)) : defaultFit()
+  } catch {
+    return defaultFit()
+  }
+}
+
+export const saveFit = (limits: FitLimits) => {
+  try {
+    localStorage.setItem(FIT_KEY, JSON.stringify(limits))
+  } catch {
+    // storage may be unavailable (private mode, quota); editing still works
   }
 }
 
