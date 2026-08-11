@@ -56,7 +56,7 @@ export const Editable: React.FC<EditableProps> = ({ value, onChange, className, 
   const onPaste = (event: ClipboardEvent<HTMLSpanElement>) => {
     event.preventDefault()
     insertPlainText(event.clipboardData.getData('text/plain').replace(/\s+/g, ' '))
-    onChange(event.currentTarget.textContent ?? '')
+    onChange(ref.current?.textContent ?? '')
   }
 
   return (

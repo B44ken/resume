@@ -177,14 +177,36 @@ export const clearResume = () => {
   }
 }
 
+const ALLOWED_PROTOCOLS = ['http:', 'https:', 'mailto:', 'tel:']
+
+const hasScheme = (value: string) => /^[a-z][a-z\d+.-]*:/i.test(value)
+
+// a plain email address, recognised without a backtracking regex
+const isEmail = (value: string) => {
+  const at = value.indexOf('@')
+  if (at <= 0 || value.indexOf('@', at + 1) !== -1) return false
+  if (/[\s:/]/.test(value)) return false
+
+  const domain = value.slice(at + 1)
+  return domain.length > 2 && domain.includes('.') && !domain.startsWith('.') && !domain.endsWith('.')
+}
+
 // only allow schemes that are safe to put in an href, so imported or pasted
 // data can't smuggle in javascript: urls
 export const safeHref = (href: string): string | undefined => {
   const value = href.trim()
   if (!value) return undefined
-  if (/^(https?:\/\/|mailto:|tel:)/i.test(value)) return value
-  if (/^[/#]/.test(value)) return value
-  if (/^[^\s:@]+@[^\s:@]+\.[^\s:@]+$/.test(value)) return `mailto:${value}`
-  if (/^[^\s:/]+\.[^\s:/]{2,}/.test(value)) return `https://${value}`
-  return undefined
+  if (value.startsWith('/') || value.startsWith('#')) return value
+  if (isEmail(value)) return `mailto:${value}`
+
+  const scheme = hasScheme(value)
+  try {
+    const url = new URL(scheme ? value : `https://${value}`)
+    if (!ALLOWED_PROTOCOLS.includes(url.protocol)) return undefined
+    // "Some Company" should stay plain text rather than become a link
+    if (!scheme && !url.hostname.includes('.')) return undefined
+    return url.href
+  } catch {
+    return undefined
+  }
 }

@@ -71,9 +71,9 @@ export const Bullets: React.FC<EntryProps> = ({ block, onChange }) => {
   const editing = useEditing()
   const setBullets = (bullets: string[]) => onChange({ ...block, bullets })
 
-  const insertAfter = (index: number) => {
-    setBullets([...block.bullets.slice(0, index + 1), '', ...block.bullets.slice(index + 1)])
-    focusField(`${block.id}:${index + 1}`)
+  const insertAt = (index: number) => {
+    setBullets([...block.bullets.slice(0, index), '', ...block.bullets.slice(index)])
+    focusField(`${block.id}:${index}`)
   }
 
   const remove = (index: number) => {
@@ -95,14 +95,14 @@ export const Bullets: React.FC<EntryProps> = ({ block, onChange }) => {
           field={`${block.id}:${i}`}
           placeholder="bullet point"
           onChange={value => setBullets(block.bullets.map((bullet, index) => index === i ? value : bullet))}
-          onEnter={() => insertAfter(i)}
+          onEnter={() => insertAt(i + 1)}
           onEmptyBackspace={() => remove(i)}
         />
       </li>)}
     {editing
       ? <li className="list-none -ml-3 print:hidden">
         <InlineControls>
-          <Control label="+ bullet" title="add bullet" onClick={() => insertAfter(block.bullets.length - 1)} />
+          <Control label="+ bullet" title="add bullet" onClick={() => insertAt(block.bullets.length)} />
         </InlineControls>
       </li>
       : null}
