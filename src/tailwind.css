@@ -1,3 +1,23 @@
 @import "tailwindcss";
 
 @page { size: auto;  margin: 0mm; }
+
+/* editable fields keep the exact typography of the printed resume and only
+   pick up a subtle highlight while you work on them */
+.editable {
+  border-radius: 2px;
+  outline: none;
+}
+
+.editable:hover { background-color: color-mix(in srgb, #3b82f6 10%, transparent); }
+.editable:focus { background-color: color-mix(in srgb, #3b82f6 16%, transparent); }
+
+.editable[data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+}
+
+@media print {
+  .editable { background-color: transparent !important; }
+  .editable[data-placeholder]:empty::before { content: none; }
+}
