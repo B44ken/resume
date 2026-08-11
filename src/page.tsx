@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Resume } from './resume'
 import { EditingProvider } from './editable'
+import { useAutoFit } from './fit'
 import { clearResume, defaultResume, loadResume, parseResume, saveResume } from './data'
 import type { ResumeData } from './data'
 
@@ -13,6 +14,7 @@ export const Page = () => {
   const [data, setData] = useState<ResumeData>(loadResume)
   const [editing, setEditing] = useState(true)
   const fileInput = useRef<HTMLInputElement>(null)
+  const sheet = useAutoFit<HTMLDivElement>()
 
   useEffect(() => saveResume(data), [data])
 
@@ -44,7 +46,7 @@ export const Page = () => {
   }
 
   return (
-    <div className='mx-auto my-4 max-w-[8.5in] h-full print:m-0 leading-[1.22rem]'>
+    <div className='mx-auto my-4 max-w-[8.5in] h-full print:m-0'>
       <div className="print:hidden flex justify-center items-center gap-2 mb-3 text-sm text-gray-700">
         <ToolbarButton onClick={() => setEditing(!editing)}>{editing ? 'preview' : 'edit'}</ToolbarButton>
         <ToolbarButton onClick={() => window.print()}>print / pdf</ToolbarButton>
@@ -62,7 +64,7 @@ export const Page = () => {
           }}
         />
       </div>
-      <div className="shadow-lg py-3 px-7 print:h-full print:shadow-none">
+      <div ref={sheet} className="shadow-lg py-3 px-7 print:h-full print:shadow-none">
         <EditingProvider value={editing}>
           <Resume data={data} onChange={setData} />
         </EditingProvider>

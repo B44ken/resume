@@ -105,5 +105,5 @@ export const InlineControls: React.FC<{ children: ReactNode }> = ({ children }) 
   const editing = useEditing()
   if (!editing) return null
 
-  return <span className="inline-flex gap-1 align-middle opacity-30 hover:opacity-100 print:hidden">{children}</span>
+  return <span className="inline-flex gap-1 align-middle opacity-30 hover:opacity-100 print:hidden" data-chrome>{children}</span>
 }

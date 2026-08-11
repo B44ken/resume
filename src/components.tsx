@@ -35,7 +35,7 @@ const editLink = (current: string, apply: (href: string) => void) => {
 export const Section: React.FC<SectionProps> = ({ block, onChange, controls }) =>
   <div className="mt-2 group relative">
     <Controls>{controls}</Controls>
-    <h2 className="text-lg font-bold uppercase">
+    <h2 className="text-[1.2em] font-bold uppercase">
       <Editable value={block.title} placeholder="section" onChange={title => onChange({ ...block, title })} />
     </h2>
     <hr className="border-t border-black mt-0.5 mb-0.5" />
@@ -50,7 +50,7 @@ export const Entry: React.FC<EntryProps> = ({ block, onChange, controls }) => {
       <Editable value={block.company} placeholder="company" onChange={company => onChange({ ...block, company })} />
     </Link>
 
-  return <div className="m-0 mt-1 flex justify-between text-[0.9375rem] group relative">
+  return <div className="m-0 mt-1 flex justify-between group relative">
     <Controls>
       <Control label="link" title="edit link" onClick={() => editLink(block.link, link => onChange({ ...block, link }))} />
       {controls}
@@ -84,7 +84,7 @@ export const Bullets: React.FC<EntryProps> = ({ block, onChange }) => {
 
   if (!editing && block.bullets.length === 0) return null
 
-  return <ul className="list-disc ml-3 mb-0 text-[0.9375rem]">
+  return <ul className="list-disc ml-3 mb-0">
     {block.bullets.map((item, i) =>
       <li key={i} className="mb-0 group relative">
         <Controls>
@@ -100,7 +100,7 @@ export const Bullets: React.FC<EntryProps> = ({ block, onChange }) => {
         />
       </li>)}
     {editing
-      ? <li className="list-none -ml-3 print:hidden">
+      ? <li className="list-none -ml-3 print:hidden" data-chrome>
         <InlineControls>
           <Control label="+ bullet" title="add bullet" onClick={() => insertAt(block.bullets.length)} />
         </InlineControls>
@@ -110,7 +110,7 @@ export const Bullets: React.FC<EntryProps> = ({ block, onChange }) => {
 }
 
 export const SkillCategory: React.FC<SkillProps> = ({ block, onChange, controls }) =>
-  <div className="mb-0.5 text-[0.9375rem] group relative">
+  <div className="mb-0.5 group relative">
     <Controls>{controls}</Controls>
     <span className="font-bold"><Editable value={block.title} placeholder="category" onChange={title => onChange({ ...block, title })} />:</span>{' '}
     <Editable value={block.skills} placeholder="skills" onChange={skills => onChange({ ...block, skills })} />
@@ -118,10 +118,10 @@ export const SkillCategory: React.FC<SkillProps> = ({ block, onChange, controls 
 
 export const Header: React.FC<HeaderProps> = ({ name, info, onName, onContact, onAddContact, onRemoveContact }) =>
   <header className="flex flex-row md:items-center mb-0 flex-wrap justify-between">
-    <h1 className="text-3xl font-bold">
+    <h1 className="text-[2em] font-bold">
       <Editable value={name} placeholder="your name" onChange={onName} />
     </h1>
-    <div className="text-[0.9375rem] mt-1 md:mt-0 gap-2">
+    <div className="mt-1 md:mt-0 gap-2">
       <div className="flex flex-row items-center gap-2">
         {info.map(item =>
           <span key={item.id} className="inline-flex items-center gap-1">
